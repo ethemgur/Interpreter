@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="{% static 'tinymce/js/tinymce/tinymce.min.js' %}"></script>
+    <script>
+        tinymce.init({selector:'textarea'});
+    </script>
+    <title>New</title>
+</head>
+<body>
+    <form action="{% url 'translates:create' %}" method="post">
+    {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="OK">
+    </form>
+
+    <textarea>Your content here</textarea>
+
+</body>
+</html>

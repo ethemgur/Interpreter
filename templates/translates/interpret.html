@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail {{ text_id }} / {{ sentence_id }}</title>
+</head>
+<body>
+    <a href="/translates/new/">New Content</a>
+    <div>{{ text.content|safe }}</div>
+    <p>{{ sentence.content|safe }}</p>
+    <form action="{% url 'translates:interpret' text_id sentence_id %}" method="post">
+        {% csrf_token %}
+        <input id="tr_content" type="text" name="tr_content" />
+        <input type="submit" value="OK" />
+    </form>
+
+    <div>
+        <p>{{ gtranslation|safe }}</p>
+        {% for key, value in words.items %}
+        <p> {{ key }}: {{ value }} </p>
+        {% endfor %}
+    </div>
+
+    <div>{{ text.tr_content }}</div>
+    <a href="/translates/{{text_id}}/{{ sentence_id|add:-1 }}">&larr;Previous Sentence</a>
+    <a href="/translates/{{text_id}}/{{ sentence_id|add:1 }}">Next Sentence &rarr;</a>
+</body>
+</html>
